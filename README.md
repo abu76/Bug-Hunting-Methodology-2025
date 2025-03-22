@@ -14,8 +14,9 @@ This repository contains my **Bug Hunting Methodology** for discovering vulnerab
 5. cat subdomains_final.txt | httpx -ports 80,443,8080,8000,8888 -threads 200 > subdomains_alive.txt
 
 ### **2️⃣ Crawling & URL Extraction** 
-1. katana -u subdomains_alive.txt -d 5 -ps -pss waybackarchive,commoncrawl,alienvault -kf -jc -fx -ef woff,css,png,svg,jpg,woff2,jpeg,gif,svg -o allurls.txt  
-2. cat allurls.txt | grep -E "\.txt|\.log|\.cache|\.secret|\.db|\.backup|\.yml|\.json|\.gz|\.rar|\.zip|\.config"  
+1. katana -u subdomains_alive.txt -d 5 -ps -pss waybackarchive,commoncrawl,alienvault -kf -jc -fx -ef woff,css,png,svg,jpg,woff2,jpeg,gif,svg -o allurls.txt
+2. Alternative: katana -u subdomains_alive.txt -d 5 -kf -jc -fx -ef woff,css,png,svg,jpg,woff2,jpeg,gif,svg -o allurls.txt
+3. cat allurls.txt | grep -E "\.txt|\.log|\.cache|\.secret|\.db|\.backup|\.yml|\.json|\.gz|\.rar|\.zip|\.config"  
 
 ### **3️⃣ JavaScript Analysis** 
 1. cat allurls.txt | grep -E "\.js$" >> js.txt  
